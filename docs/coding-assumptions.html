@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Coding Assumptions</title>
+
+<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="K:\Tools\Website Styling\RPG_Bootstrap_Arial.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">MDOT Chapter 30: Great Seneca Ride On extRa (Montgomery County)</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Overview</a>
+</li>
+<li>
+  <a href="coding-assumptions.html">Coding Assumptions</a>
+</li>
+<li>
+  <a href="network-review-results.html">Network Review Results</a>
+</li>
+<li>
+  <a href="reasonableness-of-results.html">Reasonableness of Results</a>
+</li>
+<li>
+  <a href="mapping-and-findings.html">Mapping and Findings</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Coding Assumptions</h1>
+
+</div>
+
+
+<p>The analysis of Project XX-XX required developing General Transit
+Feed Specification (GTFS) files to model the proposed fixed route bus
+service.</p>
+<p>The following sections of this report describe service
+characteristics encoded into the GTFS files.</p>
+<div id="alignment-and-service-characteristic" class="section level2">
+<h2>Alignment and Service Characteristic</h2>
+<p>The project provides new service along two alignments between Shady
+Grove Metro East and Traville Transit Center.</p>
+<ul>
+<li><p><strong>Pink Line:</strong> Establishes a connection from the
+bustling Shady Grove corridor to the Life Sciences Center via Medical
+Center Drive, with a round-trip travel time estimate is 66:30.</p></li>
+<li><p><strong>Lime Line:</strong> Provides an express service along
+I-370 to RIO, Crown Farm, and central locations within the Life Science
+Center, with a round-trip travel time estimate of 51:43.</p></li>
+</ul>
+<p>Dedicated bus lanes will be constructed along existing curbside lanes
+to enhance travel times and improve reliability. Right-turning vehicles
+will be permitted to use these lanes at designated intersections.
+Transit Signal Priority (TSP) will be implemented at key intersections
+along the Pink Line.</p>
+<p>The following maps depicts station locations and route alignment
+developed to calculate travel distances and travel times for coding the
+proposed service into a GTFS feed.</p>
+<p><img src="coding-assumptions_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Details of how the proposed service is represented in GTFS are
+provided below by describing four key tables in the feed: Stops.txt,
+Trips.txt, Stop_times.txt, and Frequencies.txt. Other tables in the new
+XX-XX feed are based on standard tables defined in the Chapter 30
+Transit Accessibility Scoring Guide (“<a
+href="https://accessdocs.readthedocs.io/en/latest/quality-assurance.html#gtfs-feed-validation">GTFS
+feed validation</a>” section) and are not described here.</p>
+</div>
+<div id="attributes" class="section level2">
+<h2>Attributes</h2>
+<p>The attributes of the base multimodal network were modified through
+the addition of the newly developed GTFS feed modeling Project XX-XX.
+The details of how Project XX-XX was represented in GTFS are provided
+below by describing four key tables of the feeds: Stops.txt, Trips.txt,
+Stop_times.txt, and Frequencies.txt.</p>
+<p>Other tables in the new project feed are based on standard tables
+defined in the Chapter 30 Transit Accessibility Scoring Guide (“Standard
+GTFS Tables” section) and are not described here.</p>
+<div id="stops.txt" class="section level3">
+<h3>Stops.txt</h3>
+<p><strong>Table 1. Stops Table</strong></p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+stop_id
+</th>
+<th style="text-align:left;">
+stop_code
+</th>
+<th style="text-align:left;">
+stop_name
+</th>
+<th style="text-align:left;">
+stop_desc
+</th>
+<th style="text-align:right;">
+stop_lat
+</th>
+<th style="text-align:right;">
+stop_lon
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+pink1
+</td>
+<td style="text-align:left;">
+pink1
+</td>
+<td style="text-align:left;">
+SHADY GROVE METRO STATION - EAST (Bay F)
+</td>
+<td style="text-align:left;">
+Shady Grove Metro Station - East
+</td>
+<td style="text-align:right;">
+39.12078
+</td>
+<td style="text-align:right;">
+-77.16335
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pink2
+</td>
+<td style="text-align:left;">
+pink2
+</td>
+<td style="text-align:left;">
+SHADY GROVE RD AT CRABBS BRANCH WAY
+</td>
+<td style="text-align:left;">
+Westside at Shady Grove
+</td>
+<td style="text-align:right;">
+39.12878
+</td>
+<td style="text-align:right;">
+-77.16753
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pink3
+</td>
+<td style="text-align:left;">
+pink3
+</td>
+<td style="text-align:left;">
+SHADY GROVE RD AT CHOKE CHERRY RD
+</td>
+<td style="text-align:left;">
+Rockville - Choke Cherry Crossing
+</td>
+<td style="text-align:right;">
+39.11463
+</td>
+<td style="text-align:right;">
+-77.18572
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pink4
+</td>
+<td style="text-align:left;">
+pink4
+</td>
+<td style="text-align:left;">
+SHADY GROVE RD AT CORPORATE BLVD
+</td>
+<td style="text-align:left;">
+Shady Grove Corporate Center
+</td>
+<td style="text-align:right;">
+39.10752
+</td>
+<td style="text-align:right;">
+-77.18947
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pink5
+</td>
+<td style="text-align:left;">
+pink5
+</td>
+<td style="text-align:left;">
+OMEGA DR AT RESEARCH BLVD
+</td>
+<td style="text-align:left;">
+Crown - East
+</td>
+<td style="text-align:right;">
+39.10706
+</td>
+<td style="text-align:right;">
+-77.19523
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pink6
+</td>
+<td style="text-align:left;">
+pink6
+</td>
+<td style="text-align:left;">
+MEDICAL CENTER DR AT JHU
+</td>
+<td style="text-align:left;">
+Life Sci - East
+</td>
+<td style="text-align:right;">
+39.10337
+</td>
+<td style="text-align:right;">
+-77.19646
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pink7
+</td>
+<td style="text-align:left;">
+pink7
+</td>
+<td style="text-align:left;">
+MEDICAL CENTER DR AT MEDICAL CENTER WAY
+</td>
+<td style="text-align:left;">
+Shady Grove Medical Center- South
+</td>
+<td style="text-align:right;">
+39.09771
+</td>
+<td style="text-align:right;">
+-77.19590
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pink8
+</td>
+<td style="text-align:left;">
+pink8
+</td>
+<td style="text-align:left;">
+TRAVILLE TRANSIT CENTER UNIVERSITY OF SHADY GROVE
+</td>
+<td style="text-align:left;">
+Traville Transit Center
+</td>
+<td style="text-align:right;">
+39.09273
+</td>
+<td style="text-align:right;">
+-77.20242
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lime1
+</td>
+<td style="text-align:left;">
+lime1
+</td>
+<td style="text-align:left;">
+SHADY GROVE METRO STATION - EAST (Bay E)
+</td>
+<td style="text-align:left;">
+Shady Grove Metro Station - East
+</td>
+<td style="text-align:right;">
+39.12078
+</td>
+<td style="text-align:right;">
+-77.16335
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lime2
+</td>
+<td style="text-align:left;">
+lime2
+</td>
+<td style="text-align:left;">
+FIELDS RD AT RIO BLVD
+</td>
+<td style="text-align:left;">
+Downtown Crown/Rio Washingtonian Center
+</td>
+<td style="text-align:right;">
+39.11578
+</td>
+<td style="text-align:right;">
+-77.20383
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lime3
+</td>
+<td style="text-align:left;">
+lime3
+</td>
+<td style="text-align:left;">
+DECOVERLY DR AT CROWN PARK AVE
+</td>
+<td style="text-align:left;">
+Crown - Central
+</td>
+<td style="text-align:right;">
+39.11111
+</td>
+<td style="text-align:right;">
+-77.20120
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lime4
+</td>
+<td style="text-align:left;">
+lime4
+</td>
+<td style="text-align:left;">
+DIAMOND DR AT DECOVERLY DR
+</td>
+<td style="text-align:left;">
+Decoverly
+</td>
+<td style="text-align:right;">
+39.10693
+</td>
+<td style="text-align:right;">
+-77.20302
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lime5
+</td>
+<td style="text-align:left;">
+lime5
+</td>
+<td style="text-align:left;">
+BROSCHART RD AT JHU
+</td>
+<td style="text-align:left;">
+Life Sci - West
+</td>
+<td style="text-align:right;">
+39.10320
+</td>
+<td style="text-align:right;">
+-77.19993
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lime6
+</td>
+<td style="text-align:left;">
+lime6
+</td>
+<td style="text-align:left;">
+BROSCHART RD AT MEDICAL CENTER WAY
+</td>
+<td style="text-align:left;">
+Shady Grove Medical Center - West
+</td>
+<td style="text-align:right;">
+39.09899
+</td>
+<td style="text-align:right;">
+-77.20167
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lime7
+</td>
+<td style="text-align:left;">
+lime7
+</td>
+<td style="text-align:left;">
+TRAVILLE TRANSIT CENTER UNIVERSITY OF SHADY GROVE
+</td>
+<td style="text-align:left;">
+Traville Transit Center
+</td>
+<td style="text-align:right;">
+39.09273
+</td>
+<td style="text-align:right;">
+-77.20242
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="trips.txt-vehicle-trip-enumeration" class="section level3">
+<h3>Trips.txt (vehicle-trip enumeration)</h3>
+<p>The trips file represents a single route with a seven-day travel
+profile. The scoring methodology is based around peak AM travel times.
+The feed was only developed to represent this time period and the
+associated frequencies and characteristics.</p>
+<p><strong>Table 2. Trips Table</strong></p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+route_id
+</th>
+<th style="text-align:left;">
+service_id
+</th>
+<th style="text-align:left;">
+trip_id
+</th>
+<th style="text-align:left;">
+trip_headsign
+</th>
+<th style="text-align:left;">
+trip_short_name
+</th>
+<th style="text-align:left;">
+direction_id
+</th>
+<th style="text-align:left;">
+block_id
+</th>
+<th style="text-align:left;">
+shape_id
+</th>
+<th style="text-align:left;">
+wheelchair_accessible
+</th>
+<th style="text-align:left;">
+bikes_allowed
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+gstn_express
+</td>
+<td style="text-align:left;">
+MTWTF
+</td>
+<td style="text-align:left;">
+pink_sb
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+gstn_express
+</td>
+<td style="text-align:left;">
+MTWTF
+</td>
+<td style="text-align:left;">
+pink_nb
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+gstn_express
+</td>
+<td style="text-align:left;">
+MTWTF
+</td>
+<td style="text-align:left;">
+lime_sb
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+gstn_express
+</td>
+<td style="text-align:left;">
+MTWTF
+</td>
+<td style="text-align:left;">
+lime_nb
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="stop_times.txt-transit-schedule" class="section level3">
+<h3>Stop_times.txt (transit schedule)</h3>
+<p>The stop times table was developed by determining an average travel
+speed based on the travel time and approximate length of the line.</p>
+<p><strong>Table 3. Stops Times Table</strong></p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+trip_id
+</th>
+<th style="text-align:left;">
+arrival_time
+</th>
+<th style="text-align:left;">
+departure_time
+</th>
+<th style="text-align:left;">
+stop_id
+</th>
+<th style="text-align:right;">
+stop_sequence
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+pink_sb
+</td>
+<td style="text-align:left;">
+06:01:00
+</td>
+<td style="text-align:left;">
+06:01:00
+</td>
+<td style="text-align:left;">
+pink1
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pink_sb
+</td>
+<td style="text-align:left;">
+06:09:50
+</td>
+<td style="text-align:left;">
+06:09:50
+</td>
+<td style="text-align:left;">
+pink2
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pink_sb
+</td>
+<td style="text-align:left;">
+06:17:37
+</td>
+<td style="text-align:left;">
+06:17:37
+</td>
+<td style="text-align:left;">
+pink3
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pink_sb
+</td>
+<td style="text-align:left;">
+06:20:13
+</td>
+<td style="text-align:left;">
+06:20:13
+</td>
+<td style="text-align:left;">
+pink4
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pink_sb
+</td>
+<td style="text-align:left;">
+06:22:49
+</td>
+<td style="text-align:left;">
+06:22:49
+</td>
+<td style="text-align:left;">
+pink5
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pink_sb
+</td>
+<td style="text-align:left;">
+06:24:54
+</td>
+<td style="text-align:left;">
+06:24:54
+</td>
+<td style="text-align:left;">
+pink6
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pink_sb
+</td>
+<td style="text-align:left;">
+06:26:27
+</td>
+<td style="text-align:left;">
+06:26:27
+</td>
+<td style="text-align:left;">
+pink7
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pink_sb
+</td>
+<td style="text-align:left;">
+06:34:15
+</td>
+<td style="text-align:left;">
+06:34:15
+</td>
+<td style="text-align:left;">
+pink8
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pink_nb
+</td>
+<td style="text-align:left;">
+06:01:00
+</td>
+<td style="text-align:left;">
+06:01:00
+</td>
+<td style="text-align:left;">
+pink8
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pink_nb
+</td>
+<td style="text-align:left;">
+06:08:48
+</td>
+<td style="text-align:left;">
+06:08:48
+</td>
+<td style="text-align:left;">
+pink7
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pink_nb
+</td>
+<td style="text-align:left;">
+06:10:21
+</td>
+<td style="text-align:left;">
+06:10:21
+</td>
+<td style="text-align:left;">
+pink6
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pink_nb
+</td>
+<td style="text-align:left;">
+06:12:26
+</td>
+<td style="text-align:left;">
+06:12:26
+</td>
+<td style="text-align:left;">
+pink5
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pink_nb
+</td>
+<td style="text-align:left;">
+06:15:02
+</td>
+<td style="text-align:left;">
+06:15:02
+</td>
+<td style="text-align:left;">
+pink4
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pink_nb
+</td>
+<td style="text-align:left;">
+06:17:37
+</td>
+<td style="text-align:left;">
+06:17:37
+</td>
+<td style="text-align:left;">
+pink3
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pink_nb
+</td>
+<td style="text-align:left;">
+06:25:25
+</td>
+<td style="text-align:left;">
+06:25:25
+</td>
+<td style="text-align:left;">
+pink2
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pink_nb
+</td>
+<td style="text-align:left;">
+06:34:15
+</td>
+<td style="text-align:left;">
+06:34:15
+</td>
+<td style="text-align:left;">
+pink1
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lime_sb
+</td>
+<td style="text-align:left;">
+06:01:00
+</td>
+<td style="text-align:left;">
+06:01:00
+</td>
+<td style="text-align:left;">
+lime1
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lime_sb
+</td>
+<td style="text-align:left;">
+06:09:58
+</td>
+<td style="text-align:left;">
+06:09:58
+</td>
+<td style="text-align:left;">
+lime2
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lime_sb
+</td>
+<td style="text-align:left;">
+06:17:53
+</td>
+<td style="text-align:left;">
+06:17:53
+</td>
+<td style="text-align:left;">
+lime3
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lime_sb
+</td>
+<td style="text-align:left;">
+06:20:31
+</td>
+<td style="text-align:left;">
+06:20:31
+</td>
+<td style="text-align:left;">
+lime4
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lime_sb
+</td>
+<td style="text-align:left;">
+06:23:09
+</td>
+<td style="text-align:left;">
+06:23:09
+</td>
+<td style="text-align:left;">
+lime5
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lime_sb
+</td>
+<td style="text-align:left;">
+06:25:16
+</td>
+<td style="text-align:left;">
+06:25:16
+</td>
+<td style="text-align:left;">
+lime6
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lime_sb
+</td>
+<td style="text-align:left;">
+06:26:51
+</td>
+<td style="text-align:left;">
+06:26:51
+</td>
+<td style="text-align:left;">
+lime7
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lime_nb
+</td>
+<td style="text-align:left;">
+06:01:00
+</td>
+<td style="text-align:left;">
+06:01:00
+</td>
+<td style="text-align:left;">
+lime7
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lime_nb
+</td>
+<td style="text-align:left;">
+06:02:35
+</td>
+<td style="text-align:left;">
+06:02:35
+</td>
+<td style="text-align:left;">
+lime6
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lime_nb
+</td>
+<td style="text-align:left;">
+06:04:42
+</td>
+<td style="text-align:left;">
+06:04:42
+</td>
+<td style="text-align:left;">
+lime5
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lime_nb
+</td>
+<td style="text-align:left;">
+06:07:20
+</td>
+<td style="text-align:left;">
+06:07:20
+</td>
+<td style="text-align:left;">
+lime4
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lime_nb
+</td>
+<td style="text-align:left;">
+06:09:58
+</td>
+<td style="text-align:left;">
+06:09:58
+</td>
+<td style="text-align:left;">
+lime3
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lime_nb
+</td>
+<td style="text-align:left;">
+06:17:53
+</td>
+<td style="text-align:left;">
+06:17:53
+</td>
+<td style="text-align:left;">
+lime2
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lime_nb
+</td>
+<td style="text-align:left;">
+06:26:51
+</td>
+<td style="text-align:left;">
+06:26:51
+</td>
+<td style="text-align:left;">
+lime1
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="frequencies.txt-frequency-of-recurring-trips"
+class="section level3">
+<h3>Frequencies.txt (frequency of recurring trips)</h3>
+<p>A frequencies table was developed to model the headways of the line
+during weekday AM peak travel times. The table defines a start and end
+time for a headway, with each headway associated with a trip ID. The
+headways are provided in seconds. The trip IDs link the headway times to
+the individual trips that comprise the route described in the trips.txt
+file. When frequencies table is used, the stop times file defines a
+template of stop sequences and travel times between stops, and the
+frequencies table defines the interval of recurrence for each trip
+following the stop times template.</p>
+<p><strong>Table 4. Frequencies Table</strong></p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+trip_id
+</th>
+<th style="text-align:left;">
+start_time
+</th>
+<th style="text-align:left;">
+end_time
+</th>
+<th style="text-align:right;">
+headway_secs
+</th>
+<th style="text-align:left;">
+exact_times
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+pink_sb
+</td>
+<td style="text-align:left;">
+06:00:00
+</td>
+<td style="text-align:left;">
+10:00:00
+</td>
+<td style="text-align:right;">
+600
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pink_nb
+</td>
+<td style="text-align:left;">
+06:00:00
+</td>
+<td style="text-align:left;">
+10:00:00
+</td>
+<td style="text-align:right;">
+600
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lime_sb
+</td>
+<td style="text-align:left;">
+06:00:00
+</td>
+<td style="text-align:left;">
+10:00:00
+</td>
+<td style="text-align:right;">
+900
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lime_nb
+</td>
+<td style="text-align:left;">
+06:00:00
+</td>
+<td style="text-align:left;">
+10:00:00
+</td>
+<td style="text-align:right;">
+900
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="network" class="section level3">
+<h3>Network</h3>
+<p>The following maps depict the GTFS feed for both base service as well
+as proposed service represented as a routable network. While the
+alignment was used to develop route distances and speeds, the resulting
+GTFS-derived network represents transit service as straight lines
+between stops, with the associated scheduling information that was built
+around the specific alignments associated with each segment.</p>
+<p><strong>Figure 2. Base Network</strong></p>
+<p><img src="coding-assumptions_files/figure-html/base%20network-1.png" width="672" /></p>
+<p><strong>Figure 3. Build Network</strong></p>
+<p><img src="coding-assumptions_files/figure-html/build%20network-1.png" width="672" /></p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

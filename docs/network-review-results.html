@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Network Review Results</title>
+
+<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="K:\Tools\Website Styling\RPG_Bootstrap_Arial.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">MDOT Chapter 30: Great Seneca Ride On extRa (Montgomery County)</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Overview</a>
+</li>
+<li>
+  <a href="coding-assumptions.html">Coding Assumptions</a>
+</li>
+<li>
+  <a href="network-review-results.html">Network Review Results</a>
+</li>
+<li>
+  <a href="reasonableness-of-results.html">Reasonableness of Results</a>
+</li>
+<li>
+  <a href="mapping-and-findings.html">Mapping and Findings</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Network Review Results</h1>
+
+</div>
+
+
+<div id="network-dataset-configuration" class="section level2">
+<h2>Network Dataset Configuration</h2>
+<p>The multi-modal network is composed of five features classes:</p>
+<ul>
+<li><p>“TransitLines” represents vehicle trips between transit
+stops;</p></li>
+<li><p>“Stops” represents transit stops served by transit
+vehicles;</p></li>
+<li><p>“L3_HWY” represents the local street network for access to/egress
+from transit stops;</p></li>
+<li><p>“Stops_Snapped2Street” represents each transit stop as a location
+“snapped” to the “Streets_UseThisOne” features;</p></li>
+<li><p>“Connectors_Stops2Street” represents the connections from the
+L3_HWY features to the transit Stop locations via the
+Stops_Snapped2Street junctions.</p></li>
+</ul>
+<p>These features are grouped into three “connectivity groups” that
+enforce appropriate routing for transit network problems. Modeled paths
+must begin on the streets (“Streets_UseThisOne”) network (column 1) and
+can proceed to the transit lines (column 3) via the
+Connectors_Stops2Streets features (column 2). The network edge features
+are connected through the Stops (column 2-column 3) and the
+Stops_Snapped2Streets (column 1-column 2) node features. Figure 6 below
+shows the connectivity topological rules applied to the development of
+the build scenario multimodal network.</p>
+<p>Travel times between zones are computed using a travel time
+evaluator, setup for the build scenario multimodal network in Network
+Analyst as shown in Figure 7. A 3 mph (264 feet per minute) walk speed
+is assumed and the transit evaluator computes time-of-departure-specific
+transit travel times using the GTFS schedule.</p>
+<p><strong>Figure 6. Coding Assumptions</strong> <img
+src="network_connectivity_policy.png"
+alt="Figure 6. Coding Assumptions" /></p>
+<p><strong>Figure 7. Network Minutes Evaluators</strong> <img
+src="network_minutes_evaluators.png"
+alt="Figure 7. Network Minutes Evaluators" /></p>
+</div>
+<div id="connectivity-tests" class="section level2">
+<h2>Connectivity Tests</h2>
+<p>There are several steps required to create a multi-modal network,
+presenting opportunities for user error or technical anomalies to
+mis-represent network connectivity. To test the connectivity and
+usability of the proposed servcie in the network, two quality control
+tests were performed: Service area analysis and routing analysis. These
+tests are described below. All test cases are based on an assumed peak
+morning service on a typical Wednesday.</p>
+<div id="service-area-test" class="section level3">
+<h3>Service Area Test</h3>
+<p>Figures 8 and 9 show the result of the service area analysis. The
+maps visualize travel time isochrones for a single location within the
+project study area for the base network and the build network with the
+proposed fixed route bus service. Service is tested from Shady Grove
+Metro Station</p>
+<!-- A simple check that the isochrones expand as the project provides additional service and that the expansion is intuitive given the nature of the project is sufficient to confirm that the project is appropriately integrated into the base multimodal network. -->
+<p>A comparison between the service areas shows a measurable increase of
+service relative to the location used in the test, when the new service
+is introduced. These changes confirm that Project XX-XX is appropriately
+integrated into the base multimodal network.</p>
+<p><strong>Figure 8. Base Service Area</strong></p>
+<p><img src="network-review-results_files/figure-html/base%20service%20area-1.png" width="100%" /></p>
+<p><strong>Figure 9. Build Service Area</strong></p>
+<pre><code>## Loading basemap &#39;light_only_labels&#39; from map service &#39;carto&#39;...</code></pre>
+<p><img src="network-review-results_files/figure-html/build%20service%20area-1.png" width="100%" /></p>
+</div>
+<div id="route-test" class="section level3">
+<h3>Route Test</h3>
+<p>Figures 10 compares two shortest path routing tests, one for each
+route. Tests are conducted between southbound, from the Shady Grove
+Metro Station to The Universities at Shady Grove. The tests confirms the
+network is utilizing the new path the service creates.</p>
+<p>In the no-build Lime network, the shortest path between Shady Grove
+Metro Station to The Universities at Shady Grove was similar to the
+alignment used by the Pink route. In the build network, the shortest
+path uses the new alignment of I-370 and Fields Road. The build network
+provides shorter transit route by using higher speed facilities. The
+shortest path for the Pink route changes only slightly but can best be
+seen where the route now crosses Montgomery Ave on Omega Drive instead
+of making a right hand turn. While this build route is slightly longer
+than the build route it does add an additional stop on Omega Drive.</p>
+<p>The test also shows a slight travel time reduction after the addition
+of Project XX-XX for the Lime route. The test no-build route takes
+approximately 25 minutes to traverse, while the build route takes 24
+minutes. The Pink Route takes approximately 5 minutes longer to
+traverse, but the addition of a new stop does require the use of slower
+speed facilities and taking a more circuitous route.</p>
+<p><strong>Figure 10. Route test comparison</strong></p>
+<p><img src="network-review-results_files/figure-html/route%20test-1.png" width="100%" /></p>
+<p><strong>Figure 11. Route test travel time: build
+vs. no-build</strong></p>
+<p><img src="network-review-results_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><strong>Table 5. Route test travel time: build
+vs. no-build</strong></p>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Test Route Direction
+</th>
+<th style="text-align:left;">
+Scenario
+</th>
+<th style="text-align:right;">
+Travel Time (min.)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Lime
+</td>
+<td style="text-align:left;">
+Base Route
+</td>
+<td style="text-align:right;">
+24.70
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pink
+</td>
+<td style="text-align:left;">
+Base Route
+</td>
+<td style="text-align:right;">
+20.32
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lime
+</td>
+<td style="text-align:left;">
+Build Route
+</td>
+<td style="text-align:right;">
+24.27
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pink
+</td>
+<td style="text-align:left;">
+Build Route
+</td>
+<td style="text-align:right;">
+25.45
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
